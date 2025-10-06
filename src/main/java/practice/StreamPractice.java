@@ -1,6 +1,5 @@
 package practice;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -36,7 +35,6 @@ public class StreamPractice {
      * But before that subtract 1 from each element on an odd position (having the odd index).
      */
     public Double getOddNumsAverage(List<Integer> numbers) {
-        List<Integer> modified = new ArrayList<>();
 
         return IntStream.range(0, numbers.size())
                 .map(i -> (i % 2 == 1) ? numbers.get(i) - 1 : numbers.get(i))
@@ -70,10 +68,10 @@ public class StreamPractice {
      * Example: select people of working age
      * (from 18 y.o. and to 60 y.o. for men and to 55 y.o. for women inclusively).
      */
-    public List<Person> getWorkablePeople(int fromAge, int femaleToAge,
-                                          int maleToAge, List<Person> peopleList) {
+    public List<Person> getWorkablePeople(List<Person> peopleList, int fromAge, int femaleToAge,
+                                          int maleToAge, ) {
         return peopleList.stream()
-                .filter(person -> person.getAge() <= fromAge)
+                .filter(person -> person.getAge() >= fromAge)
                 .filter(person -> {
                     if (person.getSex() == Person.Sex.MAN) {
                         return person.getAge() <= maleToAge;
