@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import model.Candidate;
 import model.Cat;
 import model.Person;
@@ -19,7 +20,7 @@ public class StreamPractice {
      */
     public int findMinEvenNumber(List<String> numbers) {
         return numbers.stream()
-                .flatMap(s -> Arrays.stream(s.split("'")))
+                .flatMap(s -> Arrays.stream(s.split(",")))
                 .map(String::trim)
                 .mapToInt(Integer::parseInt)
                 .filter(n -> n % 2 == 0)
@@ -37,17 +38,9 @@ public class StreamPractice {
     public Double getOddNumsAverage(List<Integer> numbers) {
         List<Integer> modified = new ArrayList<>();
 
-        for (int i = 0; i < numbers.size(); i++) {
-            int value = numbers.get(i);
-            if (i % 2 == 1) {
-                value -= 1;
-            }
-            modified.add(value);
-        }
-
-        return modified.stream()
+        return IntStream.range(0, numbers.size())
+                .map(i -> (i % 2 == 1) ? numbers.get(i) - 1 : numbers.get(i))
                 .filter(n -> n % 2 != 0)
-                .mapToInt(Integer::intValue)
                 .average()
                 .orElseThrow(NoSuchElementException::new);
     }
