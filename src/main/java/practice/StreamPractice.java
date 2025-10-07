@@ -68,8 +68,8 @@ public class StreamPractice {
      * Example: select people of working age
      * (from 18 y.o. and to 60 y.o. for men and to 55 y.o. for women inclusively).
      */
-    public List<Person> getWorkablePeople(List<Person> peopleList, int fromAge, int femaleToAge,
-                                          int maleToAge) {
+    public List<Person> getWorkablePeople(int fromAge, int femaleToAge,
+                                          int maleToAge, List<Person> peopleList) {
         return peopleList.stream()
                 .filter(person -> person.getAge() >= fromAge)
                 .filter(person -> {
